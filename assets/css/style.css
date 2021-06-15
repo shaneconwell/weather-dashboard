@@ -1,6 +1,18 @@
-.daily-report-secondary{
-    font-weight: 500;
-    font-size: large;
-    padding-top: 1em;
+.daily-report-secondary {
+  font-weight: 500;
+  font-size: large;
+  padding-top: 1em;
 }
+/* 
+.greenUV {
+  background-color: green!important;
 
+} */
+
+.yellowUV {
+ background-color: yellow!important;
+}
+#UVtext{
+  display: none;
+  padding-top: 1em;
+}

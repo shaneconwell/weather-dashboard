@@ -12,7 +12,8 @@ var cityResultIcon = document.querySelector('#result-icon');
 var dailyTemp = document.querySelector('#daily-temp');
 var dailyWind = document.querySelector('#daily-wind');
 var dailyHumidity = document.querySelector('#daily-humidity');
-
+var dailyUVIndex = document.querySelector('#daily-UVindex');
+var UVtext = document.querySelector('#UVtext');
 
 function handleSearchFormSubmit(event) {
     event.preventDefault();
@@ -25,11 +26,15 @@ function handleSearchFormSubmit(event) {
         return;
     }
 
-
+    var latCoordinates;
+    var lonCoordinates;
     var currentWeatherQueryURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + citySearchVal + "&units=imperial&appid=" + APIkey;
     var fiveDayWeatherQueryURL = 'https://api.openweathermap.org/data/2.5/forecast/?q=' + citySearchVal + "&units=imperial&appid=" + APIkey;
-    console.log(currentWeatherQueryURL);
-    console.log(fiveDayWeatherQueryURL);
+    
+    console.log("Current Weather: " + currentWeatherQueryURL);
+    console.log("Five Day: " + fiveDayWeatherQueryURL);
+
+
 
 
     fetch(currentWeatherQueryURL)
@@ -37,23 +42,56 @@ function handleSearchFormSubmit(event) {
             return response.json();
         })
         .then(function (data) {
-            var iconCode = data.weather[0].icon;
-            var iconURL = "http://openweathermap.org/img/wn/" + iconCode + ".png";
 
 
-            
+
+
             cityResultsMainEl.textContent = data.name + " (" + now + ") ";
             $("#result-icon").html("<img src='http://openweathermap.org/img/w/" + data.weather[0].icon + ".png' alt='Icon depicting current weather.'>");
             dailyTemp.textContent = "Temp: " + data.main.temp + "°F";
             dailyWind.textContent = "Wind: " + data.wind.speed + " MPH"
             dailyHumidity.textContent = "Humidity: " + data.main.humidity + " %";
+            latCoordinates = data.coord.lat;
+            lonCoordinates = data.coord.lon;
 
-
+            console.log(latCoordinates);
+            console.log(lonCoordinates);
             console.log(data)
-        })
-    
 
-        fetch(fiveDayWeatherQueryURL)
+            fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + latCoordinates + '&lon=' + lonCoordinates + '&units=standard&exclude=minutely,hourly,daily&appid=' + APIkey)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    console.log(data)
+                    dailyUVIndex.textContent = data.current.uvi
+                    // UVtext.textContent = ("UV Index: ");
+                    
+                    UVIndex = data.current.uvi
+                    
+                    if (UVIndex < 3) {
+                        UVtext.setAttribute('style', 'display:inline-block;  ')
+                        dailyUVIndex.setAttribute("style","background-color:green; color:white; padding:0 5px 0 5px; border-radius:20px;");
+                        console.log("UV Index is: Green");
+                    }
+                    else if (UVIndex > 7) {
+                        UVtext.setAttribute('style', 'display:inline-block;  ')
+                        dailyUVIndex.setAttribute("style","background-color:red; color:white; padding:0 5px 0 5px; border-radius:20px;");
+                        console.log("UV Index is: Red");
+                    } else {
+                        console.log("UV Index is: Yellow");
+                        UVtext.setAttribute('style', 'display:inline-block;  ')
+                        dailyUVIndex.setAttribute("style","background-color:yellow; padding:0 5px 0 5px; border-radius:20px;");
+                    }
+                    
+                });
+                
+                
+
+        })
+
+
+    fetch(fiveDayWeatherQueryURL)
         .then(function (response) {
             return response.json();
         })
@@ -93,10 +131,11 @@ function handleSearchFormSubmit(event) {
 
 
         })
+
+
+
 }
 
 citySearchButtonEl.addEventListener('submit', handleSearchFormSubmit);
 
 console.log(APIkey);
-
-            // cityResultIcon.textContent = '<img src="' + iconURL + '>"';
