@@ -30,9 +30,11 @@
         </div>
 
         <div id="weather-report" class="container col-12 col-md-9 min-100-vh bg-white">
-            <div id="daily-report" class="col-12 col-md-12 p-3 m-3 text-primary border border-dark h-25">
-                <h1 id="result-text"></h1><i id="result-icon"></i>
-                
+            <div id="daily-report" class="col-12 col-md-12 p-3 m-3 text-primary border bg-white border-dark h-25">
+                <div>
+                    <h1 class="display-inline" id="result-text"></h1>
+                    <div class="display-inline" id="result-icon"></div>
+                </div>
                 <div class="daily-report-secondary"><span id="daily-temp"></span></div>
                 <div class="daily-report-secondary"><span id="daily-wind"></span></div>
                 <div class="daily-report-secondary"><span id="daily-humidity"></span></div>
@@ -42,39 +44,39 @@
                 <h2>5-Day Forecast:</h2>
                 <div id="container-5dayforcast" class="flex-row col-12 text-light">
                     <div id="day-1" class="bg-primary col-12 col-md-2 m-3 ">
-                        <h3 class="py-2">3/31/2021</h3>
-                        <h2 class="bi bi-brightness-high-fill"></h2>
-                        <h6 class="py-2" id="5day-temp">Temp:44444</h6>
-                        <h6 class="py-2" id="5day-wind">Wind:</h6>
-                        <h6 class="py-2" id="5day-Hum">Humidity:4444444</h6>
+                        <h3 class="py-2" id="fiveDayDate-01"></h3>
+                        <h2 class="py-2" id="fiveDayIcon-01"></h2>
+                        <h6 class="py-2" id="fiveDayTemp-01"></h6>
+                        <h6 class="py-2" id="fiveDayWind-01"></h6>
+                        <h6 class="py-2" id="fiveDayHum-01"></h6>
                     </div>
                     <div id="day-2" class="bg-primary col-12 col-md-2 m-3 ">
-                        <h3 class="py-2">3/31/2021</h3>
-                        <h2 class="bi bi-cloud-rain-heavy-fill"></h2>
-                        <h6 class="py-2">Temp:44444</h6>
-                        <h6 class="py-2">Wind:</h6>
-                        <h6 class="py-2">Humidity:4444444</h6>
+                        <h3 class="py-2" id="fiveDayDate-02"></h3>
+                        <h2 class="py-2" id="fiveDayIcon-02"></h2>
+                        <h6 class="py-2" id="fiveDayTemp-02"></h6>
+                        <h6 class="py-2" id="fiveDayWind-02"></h6>
+                        <h6 class="py-2" id="fiveDayHum-02"></h6>
                     </div>
-                    <div id="day-1" class="bg-primary col-12 col-md-2 m-3 ">
-                        <h3 class="py-2">3/31/2021</h3>
-                        <h2 class="bi bi-cloud-snow-fill"></h2>
-                        <h6 class="py-2">Temp:44444</h6>
-                        <h6 class="py-2">Wind:</h6>
-                        <h6 class="py-2">Humidity:4444444</h6>
+                    <div id="day-3" class="bg-primary col-12 col-md-2 m-3 ">
+                        <h3 class="py-2" id="fiveDayDate-03"></h3>
+                        <h2 class="py-2" id="fiveDayIcon-03"></h2>
+                        <h6 class="py-2" id="fiveDayTemp-03"></h6>
+                        <h6 class="py-2" id="fiveDayWind-03"></h6>
+                        <h6 class="py-2" id="fiveDayHum-03"></h6>
                     </div>
-                    <div id="day-1" class="bg-primary col-12 col-md-2 m-3 ">
-                        <h3 class="py-2">3/31/2021</h3>
-                        <h2 class="bi bi-cloud-lightning-rain-fill"></h2>
-                        <h6 class="py-2">Temp:44444</h6>
-                        <h6 class="py-2">Wind:</h6>
-                        <h6 class="py-2">Humidity:4444444</h6>
+                    <div id="day-4" class="bg-primary col-12 col-md-2 m-3 ">
+                        <h3 class="py-2" id="fiveDayDate-04"></h3>
+                        <h2 class="py-2" id="fiveDayIcon-04"></h2>
+                        <h6 class="py-2" id="fiveDayTemp-04"></h6>
+                        <h6 class="py-2" id="fiveDayWind-04"></h6>
+                        <h6 class="py-2" id="fiveDayHum-04"></h6>
                     </div>
-                    <div id="day-1" class="bg-primary col-12 col-md-2 m-3 ">
-                        <h3 class="py-2">3/31/2021</h3>
-                        <h2 class="bi bi-cloud"></h2>
-                        <h6 class="py-2">Temp:44444</h6>
-                        <h6 class="py-2">Wind:</h6>
-                        <h6 class="py-2">Humidity:4444444</h6>
+                    <div id="day-5" class="bg-primary col-12 col-md-2 m-3 ">
+                        <h3 class="py-2" id="fiveDayDate-05"></h3>
+                        <h2 class="py-2" id="fiveDayIcon-05"></h2>
+                        <h6 class="py-2" id="fiveDayTemp-05"></h6>
+                        <h6 class="py-2" id="fiveDayWind-05"></h6>
+                        <h6 class="py-2" id="fiveDayHum-05"></h6>
                     </div>
 
 
