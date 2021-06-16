@@ -15,40 +15,6 @@ var dailyHumidity = document.querySelector('#daily-humidity');
 var dailyUVIndex = document.querySelector('#daily-UVindex');
 var UVtext = document.querySelector('#UVtext');
 
-var recentCityList = document.querySelector('#recentCityList');
-var recentCities = [];
-
-
-function renderCities() {
-    recentCityList.innerHTML = "";
-    for (var i = 0; i < recentCities.length; i++) {
-        var city = recentCities[i].cityName;
-
-
-
-        var li = document.createElement('li');
-        li.textContent = city;
-        // li.setAttribute('data-index', i);
-
-        recentCityList.appendChild(li);
-    }
-}
-
-function init() {
-    var storedCities = JSON.parse(localStorage.getItem('recentCities'));
-
-    if (storedCities !== null) {
-        recentCities = storedCities;
-    }
-    console.log(recentCities);
-    renderCities();
-}
-
-
-
-// window.localStorage.getItem('user', JSON.stringify(storedCities));
-// console.log(window.localStorage);
-
 function handleSearchFormSubmit(event) {
     event.preventDefault();
 
@@ -59,23 +25,15 @@ function handleSearchFormSubmit(event) {
         console.error('You need a search input value!');
         return;
     }
-
-    var city = {
-        cityName: citySearchVal
-    }
-    recentCities.push(city);
-
-    window.localStorage.setItem('recentCities', JSON.stringify(recentCities));
-    renderCities();
-    console.log(recentCities);
+    
 
     var latCoordinates;
     var lonCoordinates;
     var currentWeatherQueryURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + citySearchVal + "&units=imperial&appid=" + APIkey;
     var fiveDayWeatherQueryURL = 'https://api.openweathermap.org/data/2.5/forecast/?q=' + citySearchVal + "&units=imperial&appid=" + APIkey;
-
-    // console.log("Current Weather: " + currentWeatherQueryURL);
-    // console.log("Five Day: " + fiveDayWeatherQueryURL);
+    
+    console.log("Current Weather: " + currentWeatherQueryURL);
+    console.log("Five Day: " + fiveDayWeatherQueryURL);
 
 
 
@@ -109,26 +67,27 @@ function handleSearchFormSubmit(event) {
                     console.log(data)
                     dailyUVIndex.textContent = data.current.uvi
                     // UVtext.textContent = ("UV Index: ");
-
+                    
                     UVIndex = data.current.uvi
-
+                    
                     if (UVIndex < 3) {
                         UVtext.setAttribute('style', 'display:inline-block;  ')
-                        dailyUVIndex.setAttribute("style", "background-color:green; color:white; padding:0 5px 0 5px; border-radius:20px;");
+                        dailyUVIndex.setAttribute("style","background-color:green; color:white; padding:0 5px 0 5px; border-radius:20px;");
                         console.log("UV Index is: Green");
-                    } else if (UVIndex > 7) {
+                    }
+                    else if (UVIndex > 7) {
                         UVtext.setAttribute('style', 'display:inline-block;  ')
-                        dailyUVIndex.setAttribute("style", "background-color:red; color:white; padding:0 5px 0 5px; border-radius:20px;");
+                        dailyUVIndex.setAttribute("style","background-color:red; color:white; padding:0 5px 0 5px; border-radius:20px;");
                         console.log("UV Index is: Red");
                     } else {
                         console.log("UV Index is: Yellow");
                         UVtext.setAttribute('style', 'display:inline-block;  ')
-                        dailyUVIndex.setAttribute("style", "background-color:yellow; padding:0 5px 0 5px; border-radius:20px;");
+                        dailyUVIndex.setAttribute("style","background-color:yellow; padding:0 5px 0 5px; border-radius:20px;");
                     }
-
+                    
                 });
-
-
+                
+                
 
         })
 
@@ -181,4 +140,3 @@ function handleSearchFormSubmit(event) {
 citySearchButtonEl.addEventListener('submit', handleSearchFormSubmit);
 
 console.log(APIkey);
-init();
